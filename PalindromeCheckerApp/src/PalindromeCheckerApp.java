@@ -1,5 +1,5 @@
 import java.util.Stack;
-public class U5PalindromeCheckerApp
+public class PalindromeCheckerApp
 {
     public static void main(String[] args)
     {
