@@ -1,29 +1,44 @@
-import java.util.Scanner;
+import java.util.*;
 
-class PalindromeService {
-    public boolean checkPalindrome(String input) {
-        if (input == null) return false;
-        int i = 0, j = input.length() - 1;
+// Strategy Interface [cite: 86]
+interface PalindromeStrategy {
+    boolean isPalindrome(String s);
+}
+
+// Stack Strategy implementation [cite: 87]
+class StackStrategy implements PalindromeStrategy {
+    public boolean isPalindrome(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (char c : s.toCharArray()) stack.push(c);
+        StringBuilder rev = new StringBuilder();
+        while (!stack.isEmpty()) rev.append(stack.pop());
+        return s.equalsIgnoreCase(rev.toString());
+    }
+}
+
+// Two-Pointer Strategy implementation [cite: 87]
+class TwoPointerStrategy implements PalindromeStrategy {
+    public boolean isPalindrome(String s) {
+        int i = 0, j = s.length() - 1;
         while (i < j) {
-            if (input.charAt(i++) != input.charAt(j--)) return false;
+            if (s.charAt(i++) != s.charAt(j--)) return false;
         }
         return true;
     }
 }
 
 public class PalindromeCheckerApp {
-    public static void main(String[] args) {
+    public static void PallindromeCheckerApp(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        PalindromeService service = new PalindromeService(); // [cite: 69]
-
         System.out.print("Enter string: ");
         String input = scanner.nextLine();
 
-        if (service.checkPalindrome(input)) {
-            System.out.println(input + " is a palindrome.");
-        } else {
-            System.out.println(input + " is not a palindrome.");
-        }
+        PalindromeStrategy strategy = new TwoPointerStrategy();
+
+        System.out.println("Using Two-Pointer Strategy: " + strategy.isPalindrome(input));
+
+        strategy = new StackStrategy();
+        System.out.println("Using Stack Strategy: " + strategy.isPalindrome(input));
         scanner.close();
     }
 }
