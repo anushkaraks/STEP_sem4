@@ -1,7 +1,7 @@
 import java.util.Stack;
 import java.util.Queue;
 import java.util.LinkedList;
-public class U6PalindromeCheckerApp
+public class PalindromeCheckerApp
 {
     public static void main(String[] args)
     {
