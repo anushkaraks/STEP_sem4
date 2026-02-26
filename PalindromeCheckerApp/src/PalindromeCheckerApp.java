@@ -1,20 +1,22 @@
-public class U4PalindromeCheckerApp {
+import java.util.Stack;
+public class U5PalindromeCheckerApp
+{
     public static void main(String[] args)
     {
-        String word = "radar";
-        char[] characters = word.toCharArray();
-        int start = 0;
-        int end = characters.length - 1;
-        boolean isPalindrome = true;
-        while (start < end)
+        String word = "racecar";
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < word.length(); i++)
         {
-            if (characters[start] != characters[end])
+            stack.push(word.charAt(i));
+        }
+        boolean isPalindrome = true;
+        for (int i = 0; i < word.length(); i++)
+        {
+            if (word.charAt(i) != stack.pop())
             {
                 isPalindrome = false;
                 break;
             }
-            start++;
-            end--;
         }
         if (isPalindrome)
         {
@@ -24,6 +26,5 @@ public class U4PalindromeCheckerApp {
         {
             System.out.println(word + " is NOT a Palindrome.");
         }
-
     }
 }
