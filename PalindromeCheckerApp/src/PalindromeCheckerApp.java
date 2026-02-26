@@ -1,32 +1,51 @@
-import java.util.Deque;
-import java.util.LinkedList;
-public class U7PalindromeCheckerApp
-{
-    public static void main(String[] args)
-    {
-        String word = "racecar";
-        Deque<Character> deque = new LinkedList<>();
-        for (int i = 0; i < word.length(); i++)
-        {
-            deque.addLast(word.charAt(i));
+import java.util.Scanner;
+
+class Node {
+    char data;
+    Node next;
+    Node(char data) { this.data = data; }
+}
+public class PalindromeCheckerApp {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter string: ");
+        String input = scanner.nextLine();
+
+        if (input.isEmpty()) return;
+
+        Node head = new Node(input.charAt(0));
+        Node temp = head;
+        for (int i = 1; i < input.length(); i++) {
+            temp.next = new Node(input.charAt(i));
+            temp = temp.next;
         }
+
+        Node slow = head, fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        Node prev = null;
+        while (slow != null) {
+            Node nextNode = slow.next;
+            slow.next = prev;
+            prev = slow;
+            slow = nextNode;
+        }
+
+        Node left = head, right = prev;
         boolean isPalindrome = true;
-        while (deque.size() > 1)
-        {
-            char front = deque.removeFirst();
-            char rear = deque.removeLast();
-            if (front != rear) {
+        while (right != null) {
+            if (left.data != right.data) {
                 isPalindrome = false;
                 break;
             }
+            left = left.next;
+            right = right.next;
         }
-        if(isPalindrome)
-        {
-            System.out.println(word + " is a Palindrome.");
-        }
-        else
-        {
-            System.out.println(word + " is NOT a Palindrome.");
-        }
+
+        System.out.println(input + (isPalindrome ? " is a palindrome." : " is not a palindrome."));
+        scanner.close();
     }
 }
