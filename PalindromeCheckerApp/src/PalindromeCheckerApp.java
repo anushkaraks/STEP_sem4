@@ -1,4 +1,4 @@
-class U1PalindromeCheckerApp
+class PalindromeCheckerApp
 {
     static final String AppName= "Palindrome Checker App";
     static final String Version = "Version 1.0";
